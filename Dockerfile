@@ -15,8 +15,8 @@ ENV HOST=0.0.0.0
 ENV IS_DOCKER=true
 ENV LANG="C.UTF-8"
 ENV NODE_ENV=production
-ENV PORT=80
-ENV DEFAULT_LAUNCH_ARGS=["--window-size=1920,1080","--disable-setuid-sandbox"]
+ENV PORT=3000
+ENV DEFAULT_LAUNCH_ARGS='["--window-size=1920,1080","--disable-setuid-sandbox"]'
 ENV DEFAULT_HEADLESS=false
 ENV DEFAULT_STEALTH=true
 ENV ALLOW_FILE_PROTOCOL=true
