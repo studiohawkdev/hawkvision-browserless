@@ -5,9 +5,9 @@
 ![Docker pulls](https://img.shields.io/docker/pulls/browserless/chrome)
 ![Dependabot](https://flat.badgen.net/badge/-/dependabot?icon=dependabot&label&color=green)
 
-browserless is a web-service that allows for remote clients to connect, drive, and execute headless work; all inside of docker. It offers first-class integrations for puppeteer, playwright, selenium's webdriver, and a slew of handy REST APIs for doing more common work. On top of all that it takes care of other common issues such as missing system-fonts, missing external libraries, and performance improvements. We even handle edge-cases like downloading files, managing sessions, and have a fully-fledged documentation site.
+browserless is a web service that allows remote clients to connect, drive, and execute headless work; all inside of docker. It offers first-class integrations for puppeteer, playwright, selenium's web driver, and a slew of handy REST APIs for doing more common work. On top of all that it takes care of other common issues such as missing system fonts, missing external libraries, and performance improvements. We even handle edge cases like downloading files, and managing sessions, and have a fully-fledged documentation site.
 
-If you've been struggling to get Chrome up and running docker, or scaling out your headless workloads, then browserless was built for you.
+If you've been struggling to get Chrome up and running docker or scaling out your headless workloads, then browserless was built for you.
 # Table of Contents
 
 1. [Features](#features)
@@ -32,21 +32,21 @@ If you've been struggling to get Chrome up and running docker, or scaling out yo
 # Features
 
 - Parallelism and queueing are built-in and configurable.
-- Fonts and emoji's working out-of-the-box.
+- Fonts and emojis working out-of-the-box.
 - Debug Viewer for actively viewing/debugging running sessions.
 - Docker releases that are built for specific puppeteer versions.
-- Docker image's are labelled with information on the version of Chrome, V8, webkit and more.
+- Docker's images are labeled with information on the version of Chrome, V8, WebKit, and more.
 - An interactive puppeteer debugger, so you can see what the headless browser is doing and use its DevTools.
 - Works with most headless libraries.
-- Configurable session timers and health-checks to keep things running smoothly.
+- Configurable session timers and health checks to keep things running smoothly.
 - Error tolerant: if Chrome dies it won't.
 - [Support for running and development on Apple's M1 machines](#building-for-arm64-apple-m1-machines)
 
 # How it works
 
-browserless listens for both incoming websocket requests, generally issued by most libraries, as well as pre-build REST APIs to do common functions (PDF generation, images and so on). When a websocket connects to browserless it invokes Chrome and proxies your request into it. Once the session is done then it closes and awaits for more connections. Some libraries use Chrome's HTTP endpoints, like `/json` to inspect debug-able targets, which browserless also supports.
+browserless listens for both incoming WebSocket requests, generally issued by most libraries, as well as pre-build REST APIs to do common functions (PDF generation, images, and so on). When a WebSocket connects to browserless it invokes Chrome and proxies your request into it. Once the session is done then it closes and awaits more connections. Some libraries use Chrome's HTTP endpoints, like `/json` to inspect debug-able targets, which browserless also supports.
 
-Your application still runs the script itself (much like a database interaction), which gives you total control over what library you want to choose and when to do upgrades. This is preferable over other solutions as Chrome is still breaking their debugging protocol quite frequently.
+Your application still runs the script itself (much like a database interaction), which gives you total control over what library you want to choose and when to do upgrades. This is preferable over other solutions as Chrome is still breaking its debugging protocol quite frequently.
 
 # Docker
 
@@ -62,16 +62,16 @@ Your application still runs the script itself (much like a database interaction)
 
 browserless comes with _two_ methods of debugging. The first is a web-based debugger for trying out small chunks of code without setting up a new project. You can see our public-facing [debugger here](https://chrome.browserless.io/).
 
-The second method is an active-session debugger. When browserless runs http requests, and puppeteer sessions, it keeps track of some browser state, and makes those sessions available for debugging. You can simply load the web-based debugger in the browser, and click the menu icon in the top-left. It'll reveal all currently running sessions and a link to "view" them in Chrome's remote devtools. You can also query the `/session` API to get a JSON representation of sessions as well.
+The second method is an active-session debugger. When browserless runs HTTP requests and puppeteer sessions, it keeps track of some browser states and makes those sessions available for debugging. You can simply load the web-based debugger in the browser, and click the menu icon in the top-left. It'll reveal all currently running sessions and a link to "view" them in Chrome's remote dev tools. You can also query the `/session` API to get a JSON representation of sessions as well.
 
 If you're using the active-session debugger, and it's executing too fast, you can apply a `?pause` query parameter to your `puppeteer.connect` call (or HTTP REST calls) and browserless will pause your script until the debugger connects. This way you don't miss any critical actions!
 
-browserless ships with an interactive debugger that makes writing scripts faster and interactive. You can use things like `debugger;` and `console.log` to capture what's happening on the page while your script is running. All of the Chrome devtools are there at your disposal. A small list of features includes:
+browserless ships with an interactive debugger that makes writing scripts faster and more interactive. You can use things like `debugger;` and `console.log` to capture what's happening on the page while your script is running. All of the Chrome dev tools are there at your disposal. A small list of features includes:
 
 - Using debugging concepts like `debugger;` and `console.log`
 - Errors in the script are caught and show up in the `console` tab
 - You can inspect the DOM, watch network requests, and even see how the page is rendering
-- Coming soon you'll be able to export the script which will produce a `index.js` and a `package.json` to get things going
+- Coming soon you'll be able to export the script which will produce an `index.js` and a `package.json` to get things going
 
 # Recommended NGINX Config
 
@@ -97,7 +97,7 @@ You can pull `latest` or more recent puppeteer versions for the arm64 platform (
 docker pull --platform=linux/arm64 browserless/chrome:latest
 ```
 
-For those still here trying to build this: first if you're on a amd64 machine (non-M1 Mac) you'll need to setup multi-platform builds. There's a lot of good resources out there to read about this, however you'll need to ensure you're on the latest docker with experimental features enabled.
+For those still here trying to build this: first, if you're on an amd64 machine (non-M1 Mac) you'll need to set up multi-platform builds. There are a lot of good resources out there to read about this, however, you'll need to ensure you're on the latest docker with experimental features enabled.
 
 ```sh
 # Setup the machine to build arm64
@@ -116,14 +116,14 @@ Once complete, you can specify a platform target and build against it. In our pr
 docker buildx build --platform linux/arm64 -t browserless/chrome:latest .
 ```
 
-> Disclaimer about arm64: In order to support arm64 inside of docker, we utilize some functionality inside of playwright to download a arm64-compatible linux build. Since most distributions out there don't have an arm64-specific build of Chromium, this means that puppeteer's chromium doesn't exist for arm64 (as far as we're aware). This, in short, means that the chromium version inside of the arm builds isn't matched _exactly_ for the version of puppeteer that it comes bundled with. Most of the time this will go unnoticed, however if you have an issue it's possible that it's because the version of chromium in the arm64-builds isn't an exact match.
+> Disclaimer about arm64: To support arm64 inside of docker, we utilize some functionality inside of playwright to download an arm64-compatible Linux build. Since most distributions out there don't have an arm64-specific build of Chromium, this means that puppeteer's chromium doesn't exist for arm64 (as far as we're aware). This, in short, means that the chromium version inside of the arm builds isn't matched _exactly_ for the version of puppeteer that it comes bundled with. Most of the time this will go unnoticed, however, if you have an issue it may be because the version of chromium in the arm64-builds isn't an exact match.
 
 # Hosting Providers
 
-We offer a first-class hosted product located [here](https://browserless.io). Alternatively you can host this image on just about any major platform that offers hosting for docker. The hosted service takes care of all the machine provisioning, notifications, dashboards and monitoring plus more:
+We offer a first-class hosted product located [here](https://browserless.io). Alternatively, you can host this image on just about any major platform that offers hosting for docker. The hosted service takes care of all the machine provisioning, notifications, dashboards, and monitoring plus more:
 
 - Easily upgrade and toggle between versions at the press of a button. No managing repositories and other code artifacts.
-- Never need to update or pull anything from docker. There's literally zero software to install to get started.
+- Never need to update or pull anything from docker. There's zero software to install to get started.
 - Scale your consumption up or down with different plans. We support up to thousands of concurrent sessions at a given time.
 
 If you're interested in using this image for commercial aspects, then please read the below section on licensing.
@@ -191,7 +191,7 @@ const driver = new webdriver.Builder()
 
 # Playwright
 
-We support running with playwright via their remote connection method on the `chromium` interface. Since playwright is very similar to puppeteer, even launch arguments and other things "just work":
+We support running with playwright via their remote connection method on the `chromium` interface. Since the playwright is very similar to a puppeteer, even launching arguments and other things "just work":
 
 **Before**
 ```js
@@ -207,17 +207,17 @@ After that, the rest of your code remains the same with no other changes require
 
 # Usage with other libraries
 
-Most libraries allow you to specify a remote instance of Chrome to interact with. They are either looking for a websocket endpoint, a host and port, or some address. Browserless supports these by default, however if you're having issues please make an issue in this project and we'll try and work with the library authors to get them integrated with browserless.
+Most libraries allow you to specify a remote instance of Chrome to interact with. They are either looking for a WebSocket endpoint, a host and port, or some address. Browserless supports these by default, however, if you're having issues please make an issue in this project and we'll try and work with the library authors to get them integrated with browserless.
 
 You can find a much larger list of supported libraries [on our documentation site](https://docs.browserless.io/docs/puppeteer-library.html).
 
 # Motivations
 
-Running Chrome on lambda is a fantastic idea but in practice is quite challenging. You're met with pretty tough upload limits, building Chrome yourself, and then dealing with odd invocation issues should everything else go ok. A lot of issues in various repositories are due to just challenges of getting Chrome running smoothly in AWS (see [here](https://github.com/GoogleChrome/puppeteer/issues?q=is%3Aissue+is%3Aopen+sort%3Acomments-desc)). You can see for yourself by going to nearly any library and sorting issues by most commented.
+Running Chrome on lambda is a fantastic idea but in practice is quite challenging. You're met with pretty tough upload limits, building Chrome yourself, and then dealing with odd invocation issues should everything else go ok. A lot of issues in various repositories are due to just the challenges of getting Chrome running smoothly in AWS (see [here](https://github.com/GoogleChrome/puppeteer/issues?q=is%3Aissue+is%3Aopen+sort%3Acomments-desc)). You can see for yourself by going to nearly any library and sorting issues by most commented.
 
-Getting Chrome running well in docker is also a challenge as there's quiet a few packages you need in order to get Chrome running. Once that's done then there's still missing fonts, getting libraries to work with it, and having limitations on service reliability.
+Getting Chrome running well in docker is also a challenge as there are quite a few packages you need to get Chrome running. Once that's done then there are still missing fonts, getting libraries to work with it, and having limitations on service reliability.
 
-All of these issues prompted me to build a first-class image and workflow for interacting with Chrome in a more streamlined way. With browserless you never have to worry about fonts, extra packages, library support, or anything else. It should just work. On top of that it comes with a prescribed approach on how you interact with Chrome, which is through socket connections (similar to a database or any other external appliance). What this means is that you get the ability to drive Chrome remotely without having to do updates/releases to the thing that runs Chrome since it's divorced from your application.
+All of these issues prompted me to build a first-class image and workflow for interacting with Chrome in a more streamlined way. With browserless, you never have to worry about fonts, extra packages, library support, or anything else. It should just work. On top of that, it comes with a prescribed approach to how you interact with Chrome, which is through socket connections (similar to a database or any other external appliance). What this means is that you get the ability to drive Chrome remotely without having to do updates/releases to the thing that runs Chrome since it's divorced from your application.
 
 # Licensing
 
@@ -225,8 +225,8 @@ If you want to use browserless to build commercial sites, applications, or in a 
 
 - Priority support on issues and features.
 - On-premise running as well as running on public cloud providers for commercial/CI purposes for proprietary systems.
-- Ability to modify the source (forking) for your own purposes.
+- Ability to modify the source (forking) for your purposes.
 
 Not only does it grant you a license to run such a critical piece of infrastructure, but you are also supporting further innovation in this space and our ability to contribute to it!
 
-If you are creating an open source application under a license compatible with the GNU GPL license v3, you may use browserless under the terms of the GPLv3. You can read more about this license [here](https://www.gnu.org/licenses/quick-guide-gplv3.en.html).
+If you are creating an open-source application under a license compatible with the GNU GPL license v3, you may use browserless under the terms of the GPLv3. You can read more about this license [here](https://www.gnu.org/licenses/quick-guide-gplv3.en.html).
