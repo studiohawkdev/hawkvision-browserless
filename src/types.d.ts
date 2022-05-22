@@ -69,6 +69,7 @@ export interface ILaunchOptions extends puppeteer.LaunchOptions {
   playwright: boolean;
   stealth: boolean;
   meta: unknown;
+  copyUserDataDir?: string;
 }
 
 export interface IBefore {

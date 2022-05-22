@@ -123,6 +123,7 @@
     "puppeteer-extra": "^3.1.15",
     "puppeteer-extra-plugin-stealth": "^2.6.5",
     "queue": "^6.0.0",
+    "recursive-copy": "^2.0.14",
     "request": "^2.83.0",
     "rimraf": "^3.0.0",
     "selenium-webdriver": "^4.0.0",

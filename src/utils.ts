@@ -1,5 +1,6 @@
 import fs from 'fs';
 import { stat, mkdir } from 'fs/promises';
+import copy from 'recursive-copy';
 import { IncomingMessage } from 'http';
 import net from 'net';
 import os from 'os';
@@ -467,6 +468,14 @@ export const mkDataDir = async (path: string) => {
     return;
   }
   await mkdir(path, { recursive: true });
+};
+
+export const cpDataDir = async (path: string) => {
+  const browserlessDataDir = await getUserDataDir();
+  if (await exists(path)) {
+    await copy(path, browserlessDataDir);
+  }
+  return browserlessDataDir;
 };
 
 export const parseRequest = (req: IncomingMessage): IHTTPRequest => {

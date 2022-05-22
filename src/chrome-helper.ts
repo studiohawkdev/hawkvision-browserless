@@ -31,6 +31,7 @@ import {
   DEFAULT_IGNORE_HTTPS_ERRORS,
   DEFAULT_LAUNCH_ARGS,
   DEFAULT_USER_DATA_DIR,
+  DEFAULT_COPY_USER_DATA_DIR,
   DISABLE_AUTO_SET_DOWNLOAD_BEHAVIOR,
   DISABLED_FEATURES,
   HOST,
@@ -53,6 +54,7 @@ import {
   IPage,
 } from './types.d';
 import {
+  cpDataDir,
   fetchJson,
   getDebug,
   getUserDataDir,
@@ -347,6 +349,7 @@ export const defaultLaunchArgs = {
   pauseOnConnect: false,
   slowMo: undefined,
   userDataDir: DEFAULT_USER_DATA_DIR,
+  copyUserDataDir: DEFAULT_COPY_USER_DATA_DIR,
   playwright: false,
   stealth: DEFAULT_STEALTH,
   meta: null,
@@ -434,6 +437,7 @@ export const convertUrlParamsToLaunchOpts = (
     slowMo,
     stealth,
     userDataDir,
+    copyUserDataDir,
     pause,
     trackingId,
     keepalive: keepaliveQuery,
@@ -491,6 +495,7 @@ export const convertUrlParamsToLaunchOpts = (
     slowMo: parseInt(slowMo as string, 10) || undefined,
     trackingId: _.isArray(trackingId) ? trackingId[0] : trackingId,
     userDataDir: (userDataDir as string) || DEFAULT_USER_DATA_DIR,
+    copyUserDataDir: (copyUserDataDir as string) || DEFAULT_COPY_USER_DATA_DIR,
     meta: urlParts,
   };
 };
@@ -540,6 +545,10 @@ export const launchChrome = async (
     await mkDataDir(explodedPath);
     opts.userDataDir = explodedPath;
     launchArgs.args.push(`--user-data-dir=${explodedPath}`);
+  } else if (opts.copyUserDataDir) {
+    const explodedPath = untildify(opts.copyUserDataDir);
+    browserlessDataDir = await cpDataDir(explodedPath);
+    launchArgs.args.push(`--user-data-dir=${browserlessDataDir}`);
   } else {
     browserlessDataDir = opts.userDataDir || (await getUserDataDir());
     launchArgs.args.push(`--user-data-dir=${browserlessDataDir}`);

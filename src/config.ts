@@ -153,6 +153,10 @@ export const DEFAULT_USER_DATA_DIR: string | undefined = process.env
   .DEFAULT_USER_DATA_DIR
   ? untildify(process.env.DEFAULT_USER_DATA_DIR)
   : undefined;
+export const DEFAULT_COPY_USER_DATA_DIR: string | undefined = process.env
+  .DEFAULT_COPY_USER_DATA_DIR
+  ? untildify(process.env.DEFAULT_COPY_USER_DATA_DIR)
+  : undefined;
 export const PREBOOT_CHROME: boolean = parseJSONParam(
   process.env.PREBOOT_CHROME,
   false,

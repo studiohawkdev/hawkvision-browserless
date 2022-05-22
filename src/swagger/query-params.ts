@@ -61,6 +61,16 @@ export const liveQueryParams = [
   },
   {
     in: 'query',
+    name: 'copyUserDataDir',
+    required: false,
+    description:
+      'Copies an existing user data dir or create new. This is require to launch multiple chrome instances',
+    schema: {
+      type: 'string',
+    },
+  },
+  {
+    in: 'query',
     name: 'pause',
     required: false,
     description:
