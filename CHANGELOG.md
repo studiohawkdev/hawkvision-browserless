@@ -13,7 +13,7 @@
 - Dependency updates.
 - Playwright example correction in README.md.
 - Use revision `970485` for puppeteer 13.x.x, `latest`, chrome-stable and `arm64`.
-- When using `KEEPALIVE` and `PREBOOT`, don't create new blank pages, and use the existing one instead.
+- When using `KEEPALIVE` and `PREBOOT`, don't create new blank pages, and use the existing ones instead.
 
 # [v1.52.0](https://github.com/browserless/chrome/compare/v1.51.1...v1.52.0)
 - Dependency updates.
@@ -37,7 +37,7 @@
 - Minor code formatting changes.
 - Drop puppeteer@13.1.3 in favor of 13.5.2.
 - Make `heapdump` an optional dependency as it's not always used, and add it back in.
-- Utilize `fs/promise` vs home-rolled promisified utils.
+- Utilize `fs/promise` vs home-rolled promised utils.
 - Fix an issue where PREBOOT and KEEPALIVE might return an `undefined` browser.
 - Logging when file-protocol requests happen and terminate a session.
 - Move the browser process exit listener into the puppeteer-provider for better session cleanup.
@@ -56,8 +56,8 @@
 - New `encoding` option in the screenshot API.
 - Drop puppeteer@12.x.x in favor of 13.x.x.
 - Fixes in our deploy scripts.
-- Fixes for windows binaries in our postinstall hook.
-- Fixes an issue where playwright tries to use a pre-booted chrome instance.
+- Fixes for windows binaries in our post-install hook.
+- Fixes an issue where the playwright tries to use a pre-booted chrome instance.
 - Small type updates.
 
 # [v1.50.0](https://github.com/browserless/chrome/compare/v1.49.1...v1.50.0)
@@ -68,7 +68,7 @@
 - Static JSON files (`protocol.json`, `version.json`) are built at runtime on their first request and then cached in memory.
 - Bumps `browserless/base` to `1.14.0`.
 - New `selector` property for screenshot-ing a single DOM node in the screenshot API.
-- `puppeteerVersions` in the package.json file has been rename do `chromeVersions`.
+- `puppeteerVersions` in the package.json file has been renamed to `chromeVersions`.
 - Internal changes for deploying production tag scripts.
 - Consolidate scripts for `postinstall`.
 - Drop support for `heapdump` due to its age and lack of platform varieties.
@@ -97,9 +97,9 @@
 # [v1.47.0](https://github.com/browserless/chrome/compare/v1.46.0...v1.47.0)
 - Dependency updates.
 - Bump `browserless/base` to `1.11.0`.
-- Add new lint task and rename GitHub actions tasks, remove `tslint`.
+- Add a new lint task and rename GitHub actions tasks, remove `tslint`.
 - Lint and prettier fixes.
-- Delay url parsing until after `before` hook runs.
+- Delay URL parsing until after the `before` hook runs.
 - New `meta` object param for page hooks (passing through arbitrary meta data set by prior hooks).
 - New `FUNCTION_ENV_VARS` environment variable pass through an allow-list of environment variables for functions to access.
 - Fix `someObject.hasOwnProperty` to `Object.prototype.hasOwnProperty.call`.
@@ -112,7 +112,7 @@
 - Limit `x-response-url` to 100 characters.
 - Add support for puppeteer@10.x.x.
 - Add `maxConcurrent` stat for metrics API + log stats every 5 minutes to stdout.
-- Some performance improvements to how pages/browsers are setup and torn down.
+- Some performance improvements to how pages/browsers are set up and torn down.
 - Add `API_DOCS_ENDPOINT` as a filterable API to deny access to.
 - Minor code reformatting from prettier.
 - Better page setup and logging.
@@ -132,9 +132,9 @@
 - Use recent Node 14 (browserless-base 1.7.0).
 - New `rejectResourceTypes` property on most APIs (content, screenshot, pdf, etc.).
 - Allow serving of `file://` protocols when explicitly enabled (default is off due to security concerns). Set `ALLOW_FILE_PROTOCOL=true` in your env params.
-- The `/pressure` API now takes into account CPU/Memory consumption, and adds a "reason" property for why the machine might be not available.
-- Fixes an issue where playwright couldn't download files.
-- You can now filter /sessions calls with a `trackingId` parameter.
+- The `/pressure` API now takes into account CPU/Memory consumption and adds a "reason" property for why the machine might be not available.
+- Fixes an issue where the playwright couldn't download files.
+- You can now filter /session calls with a `trackingId` parameter.
 - `detached` functions now return a `trackingId` when present.
 - More types, tests, and utility consolidation.
 
@@ -171,7 +171,7 @@
 # [v1.40.0](https://github.com/browserless/chrome/compare/v1.39.0...v1.40.0)
 - Dependency Updates
 - Support for playwright 1.4.0 and greater. [See more here](https://github.com/microsoft/playwright/issues/4054).
-- New `PRE_REQUEST_HEALTH_CHECK` env variable to check CPU/Memory prior to running a session. Set `MAX_CPU_PERCENT` or `MAX_MEMORY_PERCENT` for setting these thresholds. Responds with a `503` HTTP code if CPU/Memory are high on any inbound session (API, puppeteer or webdriver).
+- New `PRE_REQUEST_HEALTH_CHECK` env variable to check CPU/Memory before running a session. Set `MAX_CPU_PERCENT` or `MAX_MEMORY_PERCENT` for setting these thresholds. Responds with a `503` HTTP code if CPU/Memory are high on any inbound session (API, puppeteer, or webdriver).
 
 # [v1.39.0](https://github.com/browserless/chrome/compare/v1.38.0...v1.39.0)
 - Dependency Updates
@@ -181,7 +181,7 @@
 # [v1.38.0](https://github.com/browserless/chrome/compare/v1.37.2...v1.38.0)
 - Dependency Updates
 - Fixes a memory leak when browsers don't close properly.
-- Adds a `/heapdump` route for capturing heap dumps. Turn on by setting `ENABLE_HEAP_DUMP=true` in your docker env.
+- Adds a `/heapdump` route for capturing heap dumps. Turn it on by setting `ENABLE_HEAP_DUMP=true` in your docker env.
 - `emulateMedia` fixes on the pdf route.
 - CodeQL implemented.
 - README fixes.
@@ -201,14 +201,14 @@
 ---
 - Dependency Updates
 - README Updates
-- Fixes an issue for secured containers using prometheus (plus tests).
+- Fixes an issue for secured containers using Prometheus (plus tests).
 - Support for puppeteer `5.2.1`
 
 # [1.36.0](https://github.com/browserless/chrome/compare/v1.35.0...v1.36.0)
 - Dependency Updates
 - Drops support for puppeteer `2.0.0` and `3.0.4`, please use `2.1.1` and `3.3.0` for those revisions.
 - Adds support for puppeteer `5.0.0`.
-- Bug-fix with the server randomly closing with an uncaught error event thrown from inside underlying socket connection.
+- Bug-fix with the server randomly closing with an uncaught error event thrown from inside the underlying socket connection.
 - Adds back in `--disable-dev-shm-usage` to default arguments for better SHM performance.
 
 # [1.35.0](https://github.com/browserless/chrome/compare/v1.34.0...v1.35.0)
@@ -219,7 +219,7 @@
 
 # [v1.34.0](https://github.com/browserless/chrome/compare/v1.33.1...v1.34.0)
 **Potentially Breaking**
-- screencast API no longer supports `audio` or the `setPreferences` function in order to offer a better video experience. In order to set the width/height, simply set a page width height to what you'd like.
+- screencast API no longer supports `audio` or the `setPreferences` function to offer a better video experience. To set the width/height, simply set a page width height to what you'd like.
 - `chrome-stable` will now use `puppeteer@3.1.0` for better compatibility.
 ---
 - Dependency updates.
@@ -263,7 +263,7 @@
 
 # [1.29.1](https://github.com/browserless/chrome/compare/v1.29.0...v1.29.1)
 - Dependency Updates.
-- Fixes how deploy script determines errors when running child commands.
+- Fixes how to deploy script determines errors when running child commands.
 - Fixes issues when many selenium sessions can potentially fill up disk space.
 
 # [1.29.0](https://github.com/browserless/chrome/compare/v1.28.0...v1.29.0)
@@ -283,7 +283,7 @@
 
 # [1.27.0](https://github.com/browserless/chrome/compare/v1.26.1...v1.27.0)
 - Dependency updates.
-- New `manipulate` params for screenshots, allowing for resizing, flipping and more.
+- New `manipulate` params for screenshots, allowing for resizing, flipping, and more.
 - Better tracking of chrome-process for cleanup of zombied sessions.
 
 # [1.26.1](https://github.com/browserless/chrome/compare/v1.26.0...v1.26.1)
@@ -313,7 +313,7 @@
 - Dependency updates.
 - Bugfix on our debugger's play button being off-center.
 - Fixes driver.close() calls not cleaning the browser.
-- New `/GET` option for most our APIs. Stringify your JSON and add a ?body=YOUR-JSON with a /GET call to most of our functions! Requires `ENABLE_API_GET=true` in you docker env variables.
+- New `/GET` option for most of our APIs. Stringify your JSON and add a ?body=YOUR-JSON with a /GET call to most of our functions! Requires `ENABLE_API_GET=true` in you docker env variables.
 - WebSocket (Socket) exception handling and logging.
 - More integration and unit tests added.
 
@@ -336,7 +336,7 @@
 - Removal of unnecessary '--disable-dev-shm-usage'
 - Squelching of chromedriver's verbose args unless `DEBUG=*` is set.
 - New `/kill/${id}` route for remotely killing a certain browser.
-- Allowing of sub-child routes in workspaces.
+- Allowing sub-child routes in workspaces.
 
 # [1.21.0](https://github.com/browserless/chrome/compare/v1.20.0...v1.21.0)
 - Dependency updates.
@@ -366,15 +366,15 @@
 # [1.18.0](https://github.com/browserless/chrome/compare/v1.17.0...v1.18.0)
 - Dependency updates
 - Better `IS_DOCKER` check for kubernetes.
-- Updates to README.md, spelling fixes and Slack link.
+- Updates to README.md, spelling fixes, and Slack link.
 - Fixes to debugger and larger code bodies.
 - Removal of analytics in debugger.
-- Screencast improvements and adding ability to set new options.
-- New `waitFor` property in our APIs (content, pdf and screenshot).
+- Screencast improvements and adding the ability to set new options.
+- New `waitFor` property in our APIs (content, pdf, and screenshot).
 - Don't allow file requests on the debugger for security reasons.
 - Better metrics monitoring.
 - `singleRun` mode in docker.
-- New prometheus support!
+- New Prometheus support!
 - Fixing issues with keeping chrome alive (only closing once TTL is met).
 
 # [1.17.0](https://github.com/browserless/chrome/compare/v1.16.0...v1.17.0)
@@ -393,11 +393,11 @@
 - Fixed `DEFAULT_CHROME` => `DEFAULT_HEADLESS`.
 - Fixed a bug where `xvfb` doesn't start in time.
 - Use `SIGKILL` for killing chromedriver.
-- `/json/version` now returns a `webSocketDebuggerUrl`.
+- `/JSON/version` now returns a `webSocketDebuggerUrl`.
 
 # [1.15.0](https://github.com/browserless/chrome/compare/v1.14.1...v1.15.0)
 - New `page` and `browser` hooks for docker images that `FROM` browserless.
-- `bluebird` added as a module for `function` and other endpoints.
+- `bluebird` was added as a module for `function` and other endpoints.
 - More dependency updates.
 
 # [1.14.1](https://github.com/browserless/chrome/compare/v1.14.0...v1.14.1)
@@ -417,21 +417,21 @@
 
 # [1.13.0](https://github.com/browserless/chrome/compare/v1.12.0...v1.13.0)
 - A minor refactor to consolidate calls to `url.parse` for performance gains.
-- Introduces a per-session based timeout that overrides the global timeout.
+- Introduces a per-session-based timeout that overrides the global timeout.
 - Consolidates authorization checks to remove duplication.
-- Moves more types into their backing modules in order to better consolidate files.
+- Moves more types into their backing modules to better consolidate files.
 
 # [1.12.0](https://github.com/browserless/chrome/compare/v1.11.0...v1.12.0)
 - Set's a non-conflicting `WORKSPACE_DIR` and `DEFAULT_USER_DATA_DIR` in docker by default.
 - Drops support for puppeteer `1.15.0` and adds `1.19.0`.
-- Web-based debugger now sends cookies for docker deployments that are secure.
+- Web-based debugger now sends cookies for secure docker deployments.
 
 # [1.11.0](https://github.com/browserless/chrome/compare/v1.10.0...v1.11.0)
-- Live debugger is now self-hosted, no more enforced https though it's still recommended.
+- Live debugger is now self-hosted, no more enforced HTTPS though it's still recommended.
 - Consolidated build steps.
 - Using the same chromedriver binary that matches the puppeteer's bundled chromium.
 - Introducing `trackingId` workflows.
-- Fixing unused export's, removing extraneous internal methods.
+- Fixing unused exports, and removing extraneous internal methods.
 - `/workspace` API now returns sub-files and scopes sessions by `trackingId` when present.
 - Support for `/json/new` protocol.
 - Dependency updates.
@@ -444,15 +444,15 @@
 - Defaulted most ENV-variables in docker to sensible defaults.
 - New `rotate` feature for PDF endpoint: `{ rotate: 90 }` => rotate left 90 degrees.
 - Support for `browserless.token` in the docker image.
-- puppeteer integration now returns semantic HTTP codes for certain errors (`400`, `403` and `429`).
+- puppeteer integration now returns semantic HTTP codes for certain errors (`400`, `403`, and `429`).
 - Support for chromedriver's move to the W3C spec 'goog:chromeOptions'.
 - The debugger now filters out `about:blank` pages, and includes sessions by Selenium.
-- Workspace support for selenium-based integrations.
+- Workspace support for Selenium-based integrations.
 
 # [1.9.0](https://github.com/browserless/chrome/compare/v1.8.0...v1.9.0)
 - Better handling of browser/socket closing in puppeteer integrations.
 - Numerous screencast fixes.
-- Moved all GH links to new repo location.
+- Moved all GH links to the new repo location.
 - Dep updates.
 
 # [1.8.0](https://github.com/browserless/chrome/compare/v1.7.0...v1.8.0)
@@ -474,8 +474,8 @@
 - Bumped Puppeteer to 1.15.0.
 
 # 1.5.0
-- New `/session` API (and accompanying routes) for display/viewing active sesions in a remote debugger(!).
-- New `?pause` query-param for pausing sessions prior to running them (useful for the live debug viewer).
+- New `/session` API (and accompanying routes) for displaying/viewing active sessions in a remote debugger(!).
+- New `?pause` query-param for pausing sessions before running them (useful for the live debug viewer).
 - The browserless debugger now exposes links to these debug pages via the sidebar.
 - New Debugger page can be disabled via the `ENABLE_DEBUG_VIEWER=false` environment variable flag.
 - Move to use `node@10`.
@@ -489,15 +489,15 @@
 # Fixes
 - New deploy.js file to do deployments "on-prem"
 - Updated new builds for puppeteer 1.12.2 and 1.13.0
-- Fixes an issues in CORS handling
+- Fixes an issue in CORS handling
 
 # 1.3.0
 
 # Minor changes
-- The `screenshot`, `function`, `pdf`, and `content` API's now accept new content-types for easier POSTing of small payloads (see docsite).
+- The `screenshot`, `function`, `pdf`, and `content` API now accepts new content types for easier POSTing of small payloads (see docsite).
 - The `screencast` API can now start/stop recording programmatically via a `startScreencast` and `stopScreencast` params (see docsite).
 - New `external` dir for injecting custom `before` and `after` hooks in external docker builds.
-- A new `timeout` query-option for session-based timeouts vs using the global one.
+- A new `timeout` query option for session-based timeouts vs using the global one.
 - New `requestInterceptors` for injection custom request behavior.
 
 # Fixes
@@ -509,7 +509,7 @@
 
 # Minor Changes
 - New `requestInterceptors` for the /screenshot API, [allowing you to mock data in response to a request](https://github.com/browserless/chrome/pull/119).
-- Code debugger now transmits code over-the-wire via cookies to avoid URL max-length issues.
+- Code debugger now transmits code over the wire via cookies to avoid URL max-length issues.
 - Now supports cookie-based authentication via a `browserless_token=TOKEN;` cookie.
 
 # Fixes
@@ -518,11 +518,11 @@
 
 # 1.1.0
 
-With 1.1.0 we offer a refined way of dealing with both downloads and uploads. Both use-cases are tightly coupled to the file-system, and can leave you scratching your head as to what's going one. For more information and detailed documentation, please refer to our doc-site at https://docs.browserless.io/
+With 1.1.0 we offer a refined way of dealing with both downloads and uploads. Both use-cases are tightly coupled to the file-system and can leave you scratching your head as to what's going on. For more information and detailed documentation, please refer to our doc-site at https://docs.browserless.io/
 
 ## Minor Changes
 - New `WORKSPACE_DIR` variable for controlling where browserless stores files and uploads.
-- New `/workspace` API for doing RESTful operations on the downloads/uploads file-system.
+- New `/workspace` API for doing RESTful operations on the downloads/uploads file system.
 - New `/download` API for running a puppeteer-script, and responding with the resulting downloaded file.
 
 ## Internal Changes
@@ -532,7 +532,7 @@ With 1.1.0 we offer a refined way of dealing with both downloads and uploads. Bo
 
 # 1.0.0
 
-🥁 -- Stable version 1.0 is here! While this doesn't include major functionality changes, it _does_ change how the docker builds are generated going forward. The versioning will now contain two pieces of crucial information: the version of the _browserless_ service + the version of Chrome under-the-hood. For instance `1.2.3-puppeteer-1.10.0` is browserless at `1.2.3`, exposing puppeteer at `1.10.0`.
+🥁 -- Stable version 1.0 is here! While this doesn't include major functionality changes, it _does_ change how the docker builds are generated going forward. The versioning will now contain two pieces of crucial information: the version of the _browserless_ service + the version of Chrome under the hood. For instance `1.2.3-puppeteer-1.10.0` is browserless at `1.2.3`, exposing puppeteer at `1.10.0`.
 
 Similar to how NodeJS itself does docker releases, we'll now provide releases in 3 distinct ways:
 
@@ -540,7 +540,7 @@ Similar to how NodeJS itself does docker releases, we'll now provide releases in
 - A mutable minor version release: `1.1-puppeteer-1.12.0`
 - A mutable major version release: `1-puppeteer-1.9.0`
 
-For production deployments, we recommend using _pinned_ version releases as they won't change once released. The mutable minor/major releases will receive on-going updates whenever we do changes that are bug-fixes or feature release. Even with the best intentions it's possible that instability can be introduced with these mutable images, hence why recommend the pinned version releases.
+For production deployments, we recommend using _pinned_ version releases as they won't change once released. The mutable minor/major releases will receive ongoing updates whenever we do changes that are bug fixes or feature releases. Even with the best intentions, it's possible that instability can be introduced with these mutable images, hence why recommend the pinned version releases.
 
 Finally, we'll continue to ship support for the last 5 minor versions of Puppeteer + the Google Chrome (stable). Old images will remain, but newer versions of browserless won't be included.
 
